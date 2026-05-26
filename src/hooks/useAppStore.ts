@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 
+export type SupplementCategory = 'supplement' | 'peptide' | 'pharma' | 'cosmetic' | 'procedure';
+
 export interface Supplement {
   id: string;
   name: string;
-  brand: string;
-  type: 'supplement' | 'peptide' | 'pharma' | 'cosmetic';
+  brand?: string;
+  type: SupplementCategory;
   dosage: string;
-  frequency: 'daily' | 'weekly' | 'cycle';
+  frequency: 'daily' | 'weekly' | 'cycle' | 'as_needed';
   cycleDaysOn?: number;
   cycleDaysOff?: number;
   cycleStartDate?: string;
@@ -16,6 +18,8 @@ export interface Supplement {
   totalStock?: number;
   active: boolean;
   notes?: string;
+  targetBiomarkers?: string[];
+  coFactors?: string[];
 }
 
 export interface LabMarker {

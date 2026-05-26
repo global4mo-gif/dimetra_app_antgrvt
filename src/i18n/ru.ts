@@ -1,11 +1,10 @@
 export const ru = {
-    nav: {
+  nav: {
     dashboard: "Главная",
-    scanner: "Сканнер",
+    calendar: "Календарь",
+    stack: "Добавить",
     labs: "Анализы",
-    stack: "Стек",
-    community: "Сообщество",
-    activity: "Активность",
+    twin: "Ваш Аватар",
   },
   dashboard: {
     title: "MYKORA",

@@ -1,20 +1,22 @@
 import React, { useState, useRef } from 'react';
-import { Layers, Plus, Trash2, ShieldAlert, Play, Pause } from 'lucide-react';
+import { Layers, Plus, Trash2, ShieldAlert, Play, Pause, Camera } from 'lucide-react';
 import type { Supplement } from '../hooks/useAppStore';
 import { ru } from '../i18n/ru';
 
 interface StackManagerProps {
   supplements: Supplement[];
-  addSupplement: (supp: Omit<Supplement, 'id'>) => string;
+  addSupplement: (supp: Omit<Supplement, 'id'>) => void;
   deleteSupplement: (id: string) => void;
   toggleSupplementActive: (id: string) => void;
+  onOpenScanner?: () => void;
 }
 
 export const StackManager: React.FC<StackManagerProps> = ({
   supplements,
   addSupplement,
   deleteSupplement,
-  toggleSupplementActive
+  toggleSupplementActive,
+  onOpenScanner
 }) => {
   const [filterType, setFilterType] = useState<'all' | 'supplement' | 'peptide' | 'pharma' | 'cosmetic'>('all');
 
@@ -111,8 +113,8 @@ export const StackManager: React.FC<StackManagerProps> = ({
         <h2 className="web-title" style={{ fontSize: '32px', marginBottom: '8px' }}>{ru.stack.title}</h2>
       </div>
 
-      <button className="web-button-primary add-manual-btn" onClick={openManualModal}>
-        <Plus size={16} style={{ marginRight: '6px' }} />
+      <button className="web-button-primary" style={{ padding: '8px 16px', fontSize: '13px' }} onClick={() => onOpenScanner && onOpenScanner()}>
+        <Camera size={16} style={{ marginRight: '6px' }} />
         {ru.stack.addBtn}
       </button>
 

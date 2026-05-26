@@ -1,8 +1,8 @@
 import React from 'react';
-import { Activity, Camera, Dna, Layers, Users } from 'lucide-react';
+import { Activity, Camera, Dna, CalendarDays, User } from 'lucide-react';
 import { ru } from '../i18n/ru';
 
-export type TabType = 'dashboard' | 'scanner' | 'labs' | 'stack' | 'community';
+export type TabType = 'dashboard' | 'calendar' | 'stack' | 'labs' | 'twin';
 
 interface BottomNavProps {
   currentTab: TabType;
@@ -12,10 +12,10 @@ interface BottomNavProps {
 export const BottomNav: React.FC<BottomNavProps> = ({ currentTab, setTab }) => {
   const navItems = [
     { id: 'dashboard' as TabType, label: ru.nav.dashboard, icon: Activity },
-    { id: 'scanner' as TabType, label: ru.nav.scanner, icon: Camera },
-    { id: 'stack' as TabType, label: ru.nav.stack, icon: Layers },
+    { id: 'calendar' as TabType, label: ru.nav.calendar, icon: CalendarDays },
+    { id: 'stack' as TabType, label: ru.nav.stack, icon: Camera, isCenter: true },
     { id: 'labs' as TabType, label: ru.nav.labs, icon: Dna },
-    { id: 'community' as TabType, label: ru.nav.community, icon: Users },
+    { id: 'twin' as TabType, label: ru.nav.twin, icon: User },
   ];
 
   return (
@@ -23,6 +23,23 @@ export const BottomNav: React.FC<BottomNavProps> = ({ currentTab, setTab }) => {
       {navItems.map((item) => {
         const IconComponent = item.icon;
         const isActive = currentTab === item.id;
+        
+        if (item.isCenter) {
+          return (
+            <button
+              key={item.id}
+              className="nav-item center-fab"
+              onClick={() => setTab(item.id)}
+              aria-label={item.label}
+            >
+              <div className="fab-inner">
+                <IconComponent size={24} strokeWidth={2} color="white" />
+              </div>
+              <span className="nav-label" style={{ marginTop: '30px' }}>{item.label}</span>
+            </button>
+          );
+        }
+
         return (
           <button
             key={item.id}
@@ -63,6 +80,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({ currentTab, setTab }) => {
           flex: 1;
           padding: 6px 0;
           transition: all 0.2s ease;
+          position: relative;
         }
 
         .nav-item:hover {
@@ -73,9 +91,32 @@ export const BottomNav: React.FC<BottomNavProps> = ({ currentTab, setTab }) => {
           color: var(--mykora-orange);
         }
 
+        .center-fab {
+          position: relative;
+          top: -12px;
+        }
+
+        .fab-inner {
+          position: absolute;
+          top: -24px;
+          background: var(--mykora-orange);
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 4px 12px rgba(247, 110, 0, 0.3);
+          transition: transform 0.2s ease;
+        }
+
+        .center-fab:active .fab-inner {
+          transform: scale(0.95);
+        }
+
         .nav-label {
           font-family: "Bounded", system-ui, sans-serif;
-          font-size: 10px;
+          font-size: 9px;
           font-weight: 500;
           letter-spacing: 0.02em;
           text-transform: uppercase;

@@ -6,12 +6,13 @@ import { Dashboard } from './components/Dashboard';
 import { Scanner } from './components/Scanner';
 import { LabAnalyzer } from './components/LabAnalyzer';
 import { StackManager } from './components/StackManager';
-import { ActivityLog } from './components/ActivityLog';
-import { CommunityProtocols } from './components/CommunityProtocols';
+import { CalendarView } from './components/CalendarView';
+import { DigitalTwin } from './components/DigitalTwin';
 import { useAppStore } from './hooks/useAppStore';
 
 function App() {
   const [activeTab, setActiveTab] = useState<TabType>('dashboard');
+  const [isScannerOpen, setIsScannerOpen] = useState(false);
 
   const {
     supplements,
@@ -26,7 +27,18 @@ function App() {
     addLabTest
   } = useAppStore();
 
+  const handleTabClick = (tab: TabType) => {
+    // If they click the center FAB (stack/scanner), we could open scanner directly or open stack
+    // Let's open Stack tab, but you can also use isScannerOpen state if you want it to be a modal
+    setActiveTab(tab);
+  };
+
   const renderActiveScreen = () => {
+    // If scanner modal is forced open
+    if (isScannerOpen) {
+      return <Scanner addSupplement={addSupplement} onClose={() => setIsScannerOpen(false)} />;
+    }
+
     switch (activeTab) {
       case 'dashboard':
         return (
@@ -39,8 +51,8 @@ function App() {
             uncompleteDose={uncompleteDose}
           />
         );
-      case 'scanner':
-        return <Scanner addSupplement={addSupplement} />;
+      case 'calendar':
+        return <CalendarView supplements={supplements} adherence={adherence} />;
       case 'labs':
         return (
           <LabAnalyzer
@@ -56,17 +68,11 @@ function App() {
             addSupplement={addSupplement}
             deleteSupplement={deleteSupplement}
             toggleSupplementActive={toggleSupplementActive}
+            onOpenScanner={() => setIsScannerOpen(true)}
           />
         );
-      case 'community':
-        return <CommunityProtocols addSupplement={addSupplement} />;
-      case 'activity':
-        return (
-          <ActivityLog
-            supplements={supplements}
-            adherence={adherence}
-          />
-        );
+      case 'twin':
+        return <DigitalTwin profile={profile} labs={labs} />;
       default:
         return (
           <Dashboard
@@ -84,7 +90,7 @@ function App() {
   return (
     <MobileFrame>
       {renderActiveScreen()}
-      <BottomNav currentTab={activeTab} setTab={setActiveTab} />
+      <BottomNav currentTab={activeTab} setTab={handleTabClick} />
     </MobileFrame>
   );
 }
