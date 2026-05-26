@@ -1,0 +1,199 @@
+@font-face {
+  font-family: "Bounded";
+  src: url("/Users/uneedmo/Desktop/Mykora/SMM МИКОРА/delivery_2026-03-28/MYKORA DESIGN/Шрифты /Bounded/Bounded-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Bounded";
+  src: url("/Users/uneedmo/Desktop/Mykora/SMM МИКОРА/delivery_2026-03-28/MYKORA DESIGN/Шрифты /Bounded/Bounded-Black.ttf") format("truetype");
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: "Bounded";
+  src: url("/Users/uneedmo/Desktop/Mykora/SMM МИКОРА/delivery_2026-03-28/MYKORA DESIGN/Шрифты /Bounded/Bounded-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: "Libertinus Sans";
+  src: url("/Users/uneedmo/Desktop/Mykora/SMM МИКОРА/delivery_2026-03-28/MYKORA DESIGN/Шрифты /Libertinus Sans/libertinussans-regular.otf") format("opentype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Libertinus Sans";
+  src: url("/Users/uneedmo/Desktop/Mykora/SMM МИКОРА/delivery_2026-03-28/MYKORA DESIGN/Шрифты /Libertinus Sans/libertinussans-bold.otf") format("opentype");
+  font-weight: 700;
+}
+
+:root {
+  --mykora-ink: #111111;
+  --mykora-forest: #3C3A21;
+  --mykora-forest-soft: #979A86;
+  --mykora-orange: #F76E00;
+  --mykora-orange-deep: #D95A0A;
+  --mykora-canvas: #F7F7F4;
+  --mykora-soft-ivory: #FAF1D8;
+  --mykora-surface: #FFFFFF;
+  --mykora-surface-muted: #F1F1EE;
+  --mykora-border: #D8D8D1;
+  --mykora-muted: #77776F;
+  --mykora-text-soft: #A2A29A;
+  --mykora-silver: #C8CFD0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: var(--mykora-ink);
+  background: var(--mykora-canvas);
+  font-family: "Libertinus Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Bounded", system-ui, sans-serif;
+  text-transform: uppercase;
+  margin: 0;
+  font-weight: 500;
+}
+
+p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Base Classes */
+.web-shell {
+  width: min(100%, 1120px);
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--mykora-canvas);
+}
+
+.web-title {
+  font-family: "Bounded", system-ui, sans-serif;
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--mykora-ink);
+}
+
+.web-section-title {
+  font-family: "Bounded", system-ui, sans-serif;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--mykora-ink);
+}
+
+.web-card {
+  border: 1px solid var(--mykora-border);
+  border-radius: 8px;
+  background: var(--mykora-surface);
+  overflow: hidden;
+}
+
+.web-dark-card {
+  background: var(--mykora-forest);
+  color: var(--mykora-surface);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.web-button-primary {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--mykora-orange);
+  border-radius: 4px;
+  background: var(--mykora-orange);
+  color: #fff;
+  padding: 0 18px;
+  font-family: "Bounded", system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.web-button-primary:hover {
+  background: var(--mykora-orange-deep);
+}
+
+.web-button-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.web-button-secondary {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--mykora-ink);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--mykora-ink);
+  padding: 0 18px;
+  font-family: "Bounded", system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.web-button-secondary:hover {
+  background: var(--mykora-ink);
+  color: var(--mykora-surface);
+}
+
+/* Custom Scrollbar for inner elements */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--mykora-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--mykora-muted);
+}
+
+/* Animations */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s ease forwards;
+}
+
+/* Overriding App.css defaults */
+#root {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
